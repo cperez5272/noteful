@@ -1,27 +1,29 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import Folder from './Folder';
 
 class FolderContainer extends React.Component {
-    constructor(){
-        super()
-        this.sayHello = this.sayHello.bind(this)
+    
+    state = {
+
     }
 
-    sayHello = () => {
-        alert('working')
+    renderFolders = () => {
+        return this.props.folders.map( (folder) => {
+            return <Folder key={folder.id} folder={folder}/>
+        })
     }
+
     render() {
+        console.log(this.props);
         return (
             <div className='folder_list'>
                 <ul>
-                    <li onClick= {this.sayHello}>Folder One</li>
-                    <li onClick= {this.sayHello}>Folder Two</li>
-                    <li>Folder Three</li>
-                    <li>Add a Folder</li>
+                   {this.renderFolders()}
                 </ul>
             </div>
         )
     }
 }
 
-export default FolderContainer
+export default withRouter(FolderContainer);
